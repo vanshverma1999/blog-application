@@ -1,0 +1,20 @@
+server:
+  port: 9090
+
+
+#DB Config
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog_storage
+    username: root
+    password: "@VVmythop123"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#ddl-auto: create, update, create-drop, validate
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
