@@ -2,6 +2,7 @@ package com.practice.blogapplication.controllers;
 
 import com.practice.blogapplication.payloads.ApiResponse;
 import com.practice.blogapplication.payloads.PostDto;
+import com.practice.blogapplication.payloads.PostResponse;
 import com.practice.blogapplication.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/app/")
+@RequestMapping("/app")
 public class PostController {
 
     @Autowired
@@ -38,8 +39,12 @@ public class PostController {
         return new ResponseEntity<List<PostDto>>(posts,HttpStatus.OK);
     }
     @GetMapping("/posts")
-    public ResponseEntity<List<PostDto>> getAllPosts(){
-        return new ResponseEntity<List<PostDto>>(this.postService.getAllPost(),HttpStatus.OK);
+    public ResponseEntity<PostResponse> getAllPosts(
+            @RequestParam(value="pageNumber",defaultValue = "0",required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize",defaultValue = "10",required = false) Integer pageSize
+            ){
+        PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize);
+        return new ResponseEntity<PostResponse>(postResponse,HttpStatus.OK);
     }
     @GetMapping("/posts/{postId}")
     public ResponseEntity<PostDto> getPostById(@PathVariable("postId") Integer postId){
