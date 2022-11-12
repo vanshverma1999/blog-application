@@ -1,6 +1,7 @@
 package com.practice.blogapplication.payloads;
 
 import com.practice.blogapplication.entities.Category;
+import com.practice.blogapplication.entities.Comment;
 import com.practice.blogapplication.entities.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -20,4 +22,5 @@ public class PostDto {
     private Date addedDate;
     private CategoryDto category;
     private UserDto user;
+    private List<CommentDto> comments;
 }
